@@ -1,0 +1,30 @@
+name: Automate image build and push to docker hub
+
+on:
+  push:
+    branches: ["main"]
+  paths:
+    - 'api/Dockerfile'
+    - 'front-end-nextjs/Dockerfile'
+
+jobs:
+  build_image:
+    name: Build and push docker images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: build frontend and backend images
+        run: |
+             docker build -t keneojiteli/devops-qr-code-api:latest ./api/
+             docker build -t keneojiteli/devops-qr-code-frontend:latest ./front-end-nextjs/
+
+      - name: login to docker hub
+        run: docker login -u keneojiteli -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: push images to docker hub
+        run: |
+             docker push keneojiteli/devops-qr-code-api:latest
+             docker push keneojiteli/devops-qr-code-frontend:latest
