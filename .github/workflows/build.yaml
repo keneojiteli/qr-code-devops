@@ -7,13 +7,6 @@ on:
       - 'api/Dockerfile'
       - 'front-end-nextjs/Dockerfile'
 
-on: #event that triggers the workflow
-    push: 
-        branches: 
-          - main
-    pull_request:
-        branches: ["main"]
-
 jobs:
   build_image:
     name: Build and push docker images
