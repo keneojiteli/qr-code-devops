@@ -3,9 +3,16 @@ name: Automate image build and push to docker hub
 on:
   push:
     branches: ["main"]
-  paths:
-    - 'api/Dockerfile'
-    - 'front-end-nextjs/Dockerfile'
+    paths:
+      - 'api/Dockerfile'
+      - 'front-end-nextjs/Dockerfile'
+
+on: #event that triggers the workflow
+    push: 
+        branches: 
+          - main
+    pull_request:
+        branches: ["main"]
 
 jobs:
   build_image:
