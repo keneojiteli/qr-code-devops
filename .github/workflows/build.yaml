@@ -2,10 +2,11 @@ name: Automate image build and push to docker hub
 
 on:
   push:
-    branches: ["main"]
+    branches: 
+      - main
     paths:
-      - 'api/Dockerfile'
-      - 'front-end-nextjs/Dockerfile'
+      - api/Dockerfile
+      - front-end-nextjs/Dockerfile
 
 jobs:
   build_and_push:
